@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //基本寫法
+        let fruit = new Array("apple",'orange','banana');
+
+        console.log(fruit[0]);//印出apple
+
+        //JSON寫法
+        let arr=[9,6,2,4,3];
+        console.log(arr.length); //取得陣列長度=5
+
+        arr.push(999); //新增資料
+        console.log(arr[5]); //顯示第6筆資料
+        console.log(arr.length); //取得陣列長度=6
+
+        //建立陣列同時，直接將資料加入
+        let arr2=[5,7,5,8,2,6];
+        console.log(arr2.length);
+
+        arr2.push(888);
+        console.log(arr2[6]);
+        console.log(arr2.length);
+
+        //利用for迴圈取得陣列中的所有資料
+
+        let grades=[60,74,80,55,90];
+        
+        for(let i=0;i<grades.length;i++){
+            console.log(grades[i]);
+        }
+
+        //先算總和，再算平均值
+
+        let total=0;
+
+        for(let i=0;i<grades.length;i++){
+            total=total+grades[i];
+        }
+        console.log(total);
+
+        let avg=total/grades.length;
+        console.log(avg);
+        
+    </script>
+    
+</body>
+</html>

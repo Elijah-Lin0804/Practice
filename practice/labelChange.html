@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span onmouseover="changToAbout()">關於我</span>
+        <span onmouseover="changToExps()">學經歷</span>
+    </div>
+    <hr/>
+    <div id="about">
+        大家好，我是慕捲～
+    </div>
+    <div id="exps" style="display: none;">
+        我現在就讀慕捲星小學，天天吃滷肉飯～
+    </div>
+
+    <script>
+        let aboutDiv=document.querySelector('#about');
+        let expsDiv=document.querySelector('#exps');
+        function changToAbout(){
+            aboutDiv.style.display="block";
+            expsDiv.style.display="none";
+        }
+        function changToExps(){
+            aboutDiv.style.display="none";
+            expsDiv.style.display="block";
+        }
+    </script>
+</body>
+</html>

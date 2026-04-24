@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch practice</title>
+</head>
+<body>
+    <!--
+    AJAX/XHR 利用JavaScript進行網路連線
+    初期使用 JavaScript And XML技術
+    中期使用 XMLHttpRequest技術
+    近期使用fetch函式
+    
+        基本語法
+    fetch(網址).then(function(回應物件){
+        console.log(回應物件);
+    })
+
+    取得純文字的回應
+    fetch(網址).then(function(response){
+        return response.text();//純文字格式
+    }).then(function(data){
+        console.log(data);
+    });
+
+    取得JSON格式的回應
+    fetch(網址).then(function(response){
+        return response.json();//JSON格式資料
+    }).then(function(data){
+        console.log(data);
+    });
+
+    -->
+    <h3>AJAX/XHR/fetch網路連線練習</h3>
+    <button onclick="getData();">連線取得資料</button>
+    <div id="result">這裡會顯示取得的資料</div>
+    <script>
+        /*
+        測試用網址
+        https://cwpeng.github.io/live-records-samples/data/products.json
+        */
+        function getData(){
+            fetch('https://cwpeng.github.io/live-records-samples/data/products.json').then(function(response){
+                return response.json();
+            }).then(function(data){
+                let result=document.querySelector("#result");//抓到標籤
+                result.innerHTML="";//先把畫面清空
+                for(let i=0;i<data.length;i++){//開啟迴圈
+                    let product=data[i];//設定變數裝從data陣列中取出的每一個物件
+                    console.log(product.name, product.number, product.price)//在主控台印出
+                    result.innerHTML+="<div style='font-size:20px; color:red;'>"+product.name+","+product.price+','+product.description +"</div>";//複寫到html上，注意用+=才能串接
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

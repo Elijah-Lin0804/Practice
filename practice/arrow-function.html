@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //從1+2+3...+10的計算
+        /*
+        let total=0;
+        let n=1;
+        while(n<=10){
+            total+=n;
+            n++;
+            
+        }
+        console.log(total)
+        */
+       //從1+2+3...+10的函式
+       /*
+        function calculate(max){
+            let total=0;
+            let n=1;
+            while(n<=max){
+                total+=n;
+                n++;
+            }
+            console.log(total);
+        }
+        calculate(10);
+        calculate(20);
+        */
+        //arrow-function箭頭函式寫法
+        //let 名稱=(參數)=>{};
+
+        //如果內容只有回傳值，可以進一步簡化為
+        //let 名稱=(參數)=>(回傳值);
+
+        let calculate=(max)=>{
+            let total=0;
+            let n=1;
+            while(n<=max){
+                total+=n;
+                n++;
+            }
+            console.log(total);
+        }
+
+        calculate(10);
+        calculate(20);
+
+
+
+    </script>
+</body>
+</html>

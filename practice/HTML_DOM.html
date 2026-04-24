@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML DOM</title>
+</head>
+<body>
+    <!--
+        HTML DOM
+        每個HTML標籤都有對應的標籤物件 HTML Element
+        HTML Element全部串接在一起
+        就是html DOM(Document object Model) = window Object (網頁內建)
+
+        HTML code => HTML DOM in JavaScript => 網頁
+    -->
+    test
+    <script>
+        //window Object
+        console.log(window);
+        console.log(window.innerHeight);//視窗高度的屬性
+        console.log(window.innerWidth);
+        console.log(window.location.href);
+        //window.location.href="https://jw.org/"
+        /*
+        window.prompt()//window內建的方法
+        window.alert("hello~~")
+        */
+
+        //screen Object 螢幕資訊
+        console.log(window.screen);
+        console.log(window.screen.width);
+
+        //document Object 代表網頁主畫面
+        console.log(window.document);
+        console.log(document);//可簡寫
+        console.dir(document)
+        console.log(document.title);
+        console.log(document.querySelector);
+        
+        //取得body標籤
+        console.log(document.body);
+
+        console.log(document.body.innerHTML);
+        document.body.innerHTML="Hello HTML DOM";
+
+    </script>
+    
+    
+    test2
+
+    
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring Assignment</title>
+</head>
+<body>
+    <script>
+        //解構賦值//
+            //陣列的解構賦值//
+                //傳統做法//
+                let arr=[3,4,5];
+                let d1=arr[0];
+                let d2=arr[1];
+                let d3=arr[2];
+                console.log(d1,d2,d3);
+                
+                //解構賦值語法
+                let arr2=[6,7,8];
+                let [d4,d5,d6]=arr2;
+                console.log(d4,d5,d6);
+
+                //宣告和賦值可以分開
+                let arr3=[9,10,11];
+                let d7,d8,d9;
+                [d7,d8,d9]=arr3;
+                console.log(d7,d8,d9);
+
+                //預設值
+                let arr4=[12,13];
+                let d10,d11,d12,d13;
+                [d10,d11=1,d12=2,d13=3]=arr4;
+                console.log(d10,d11,d12,d13);
+            
+            //物件的解構賦值
+                //傳統做法
+                let obj={x:3,y:4};
+                let x=obj.x;
+                let y=obj.y;
+                console.log(obj);
+                console.log(x);
+                console.log(y);
+                
+                //解構賦值語法
+                let obj2={a:3,b:4};
+                let{a,b,z}=obj2;
+                console.log(obj2);
+                console.log(a);
+                console.log(b);
+                console.log(z);
+
+                //宣告和賦值可以分開
+                let obj3={c:5,d:6};
+                let c,d;
+                ({c,d}=obj3);//不和宣告一起執行，要多加()
+                console.log(obj3);
+                console.log(c);
+                console.log(d);
+
+                //預設值
+                let obj4={e:7};
+                let e,f;
+                ({e,f=8}=obj4);
+                console.log(obj4);
+                console.log(e);
+                console.log(f);
+                
+                //指定新的變數名稱
+                let obj5={g:9,h:10};
+                let newG,newH;
+                ({g:newG,h:newH}=obj5);
+                console.log(obj5);
+                console.log(newG);
+                console.log(newH);
+        
+        //練習題
+            //變數的資料交換
+            let n1=3,n2=4;
+            console.log(n1,n2);
+            [n2,n1]=[n1,n2];
+            console.log(n1,n2);
+
+
+
+    </script>
+</body>
+</html>

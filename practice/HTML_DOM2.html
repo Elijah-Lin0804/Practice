@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        這是一段div文字
+    </div>
+    <span id="keyword">這是一段span文字</span>
+    <script>
+        //取得標籤物件
+        let divElement=document.querySelector('.content');//用變數divElement存放class標籤物件
+        let spanElement=document.querySelector('#keyword');//用變數存放id標籤物件
+        //操作標籤物件
+        divElement.innerHTML="這是修改過的div句子";//修改內容
+        console.log(divElement.className);
+        divElement.className="content2";//修改className
+        console.log(divElement.className);
+        divElement.className="content3";
+        console.log(divElement.className);
+        console.log(spanElement);
+        divElement.style.fontSize="30px";//修改div文字樣式CSS
+        divElement.style.color="blue";
+        spanElement.style.fontSize="20px";
+        spanElement.style.color='red';
+        
+    </script>
+    <div>______________________________________</div>
+<!--事件處理-->
+    <div 
+        id="changeWord" ;
+        style="padding:20px; 
+        background-color: bisque; 
+        text-align: center;
+        border: 4px orange solid;
+        ">
+        這是一段會變身的文字
+        
+    </div>
+    <div id="button" style="background-color:rgb(220, 164, 164); text-align: center; padding: 10px";>
+        <button onclick="change();" >變身</button>
+
+    </div>
+    <script>
+        function change(){
+            let divElm=document.querySelector("#changeWord");
+            divElm.innerHTML="～假面騎士～";
+            divElm.style.backgroundColor="black";
+            divElm.style.fontSize="30px";
+            divElm.style.color="white";
+            divElm.style.textShadow="0 0 50px #fff,0 0 50px #fff,0 0 50px #fff,0 0 50px #fff"
+            let buttElm=document.querySelector("#button");
+            buttElm.innerHTML="<button onclick='changeBack();'>恢復</button>"
+                
+        }
+        function changeBack(){
+            let divElm=document.querySelector("#changeWord");
+            divElm.innerHTML="這是一段會變身的文字";
+            divElm.style.backgroundColor="bisque";
+            divElm.style.fontSize="16px";
+            divElm.style.color="black";
+            let buttElm=document.querySelector("#button");
+            buttElm.innerHTML='<button onclick="change();" >變身</button>';
+        }
+    </script>
+    
+
+
+</body>
+</html>
