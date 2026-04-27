@@ -11,13 +11,15 @@
         let name = "Elijah";
         let sentence = "How are you?";
 
-        console.log(greeting + ", My name is " + name + ". " + sentence);
+        console.log(greeting + ", my name is " + name + ". " + sentence);
     
         name = "David";
         sentence = "Nice to meet you!"
-        console.log(greeting + ", My name is " + name + ". " + sentence);
+        console.log(greeting + ", my name is " + name + ". " + sentence);
 
         console.log(typeof name);
+        console.log(typeof 24);
+        console.log(name.typeof);
 
         console.log(name[1], name[3]);
 
@@ -29,7 +31,14 @@
         let no = sentence[0] + sentence[6];
         let exclamation = sentence[sentence.length - 1];
         console.log(no + exclamation);
-        
+
+        console.log(sentence.indexOf("Nice"));
+        console.log(sentence.indexOf("to"));
+        console.log(sentence.indexOf("meet"));
+        console.log(sentence.indexOf("you"));
+        console.log(sentence.indexOf("nice"));
+
+        console.log(name.indexOf("a"));
 
 
 
