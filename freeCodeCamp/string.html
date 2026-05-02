@@ -46,7 +46,21 @@
         console.log(sentence.slice(8, 12));
         console.log(sentence.slice(-4));
 
+        console.log(sentence.toUpperCase());
+        console.log(sentence.toLowerCase());
 
+        const trimPractice = "  this is trim practice.   ";
+        console.log(trimPractice);
+        console.log(trimPractice.trim());
+        console.log(trimPractice.trimStart());
+        console.log(trimPractice.trimEnd());
+        console.log(trimPractice.trim().toUpperCase());
+        const cleanedTrimPractice = trimPractice.trim(); 
+        console.log(cleanedTrimPractice[0].toUpperCase() + cleanedTrimPractice.slice(-21));
+        
+        //以下是AI推薦的寫法：
+        const result = cleanedTrimPractice.charAt(0).toUpperCase() + cleanedTrimPractice.slice(1);
+        console.log(result);
 
     </script>
 </body>
