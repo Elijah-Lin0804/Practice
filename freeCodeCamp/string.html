@@ -62,6 +62,17 @@
         const result = cleanedTrimPractice.charAt(0).toUpperCase() + cleanedTrimPractice.slice(1);
         console.log(result);
 
+        //2026.5.3
+        const replacePractice = "I love dogs.";
+        console.log(replacePractice);
+        const replaceSentence = replacePractice.replace("dogs", "cats");
+        console.log(replaceSentence);
+        const repeatLove = "Love ".repeat(3);
+        console.log(repeatLove);
+        console.log(replaceSentence.slice(0,2) + repeatLove.toLowerCase() + replaceSentence.slice(-5)); 
+
+      
+
     </script>
 </body>
 </html>
