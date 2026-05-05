@@ -71,6 +71,34 @@
         console.log(result);
         console.log(typeof result);
 
+        let x = 5;
+        console.log(++x);//x+1再顯示
+        console.log(x++);//先顯示X，再幫X+1
+        console.log(x);
+        console.log(--x);
+        console.log(x--);
+        console.log(x);
+
+        console.log(2 ** 3 ** 2);//指數運算是從右到左，因此是512，不是64
+        
+        let a = 5;
+        let b = ++a;
+        console.log(b);//6
+
+        let c = 5;
+        let d = c++;
+        console.log(d);//5
+
+        const timmyAge = 15;
+        if (timmyAge >= 18) {
+            console.log("Timmy可以開車了");
+        } else {
+            console.log("Timmy還不能開車");
+        }
+
+        console.log(5 == "5");//true
+        console.log(5 === "5");//false
+
 
 
 
