@@ -16,6 +16,22 @@
         console.log(e << 1); //向左移動一位（右邊加一個零）=> 1010 =8+2=10
         console.log(e >> 1); //向右移動一位 101=>10 = 2
 
+        console.log(e && f); //先檢查左側，如為true，則回傳右邊的值
+        console.log(0 && f); //先檢查左側，為false，則回傳左邊的值
+        console.log(NaN && 0);
+        console.log(e || f); //先檢查左側，如為true，則回傳左邊的值
+        console.log(0 || f); //先檢查左側，為false，則回傳右邊的值
+        console.log(NaN || 0);
+
+        const gender = 'male';
+        const age = 17;
+
+        if (gender === 'male' && age >= 18) {
+            console.log("OK");
+        } else {
+            console.log('NG');
+        }
+
 
     </script>
 </body>
