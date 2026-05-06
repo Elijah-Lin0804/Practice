@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Business Card</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            width: 400px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .img {
+            width: 200px;
+            height: 200px;
+            border-radius: 15%; /* 圓形頭像 */
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #6c63ff;
+
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #333;
+                  
+        }
+
+        .title {
+            color: #6c63ff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 5px 0 15px 0;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            text-decoration: none;
+            background: #6c63ff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="./泡茶共享時光.png" alt="男孩與台灣黑熊共飲珍珠奶茶" class="img">
+        <h1>Elijah Lin</h1>
+    
+    <p class="title">Welcome to Taiwan!</p>
+    <div class="description">
+    <p>My name is Elijah, nice to seeing you!</p> 
+    <p>I'm learning programming!</p>
+    </div>
+    <div class="links">
+        <a href="https://github.com/Elijah-Lin0804" class="btn">My GitHub</a>
+        <a href="#" class="btn">My Line</a>
+    </div>
+    </div>
+    
+</body>
+</html>
