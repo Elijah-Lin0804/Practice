@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const e = 5; //101
+        const f = 3; //011
+        console.log(e & f); //001(且) 1
+        console.log(e | f); //111(或) 4+2+1=7
+        console.log(e ^ f ); //110(重疊的不要，不重疊的要)4+2=6
+        console.log(~e); //位元翻轉，快速公式 ~X=-(X+1)，~5=-(5+1)=-6
+        console.log(e << 1); //向左移動一位（右邊加一個零）=> 1010 =8+2=10
+        console.log(e >> 1); //向右移動一位 101=>10 = 2
+
+
+    </script>
+</body>
+</html>
