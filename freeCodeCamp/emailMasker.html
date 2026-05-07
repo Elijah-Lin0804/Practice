@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Build an Email Masker
+        In this lab, you will mask the username part of an email address with asterisks.
+        Masking is a term used to hide or replace sensitive information with asterisks or other characters.
+        For example, if the email address was myEmail@email.com, then the masked email address will be m*****l@email.com.
+        Objective: Fulfill the user stories below and get all the tests to pass to complete the lab.
+
+        User Stories:
+
+        Create a function named maskEmail that takes email as an argument.
+        Inside the function, you should mask the email and append the domain name to it. 
+        Remember that you can use methods like slice, repeat, indexOf or even replace to help you.
+        Outside the function, declare a variable named email to store the email address you want to mask.
+        Call the maskEmail function with the email variable and output the result to the console.
+        maskEmail("apple.pie@example.com") should return "a*******e@example.com".
+        maskEmail("freecodecamp@example.com") should return "f**********p@example.com".
+        maskEmail("info@test.dev") should return "i**o@test.dev".
+        maskEmail("user@domain.org") should return "u**r@domain.org".
+        */
+
+        //初版
+        const email = "apple.pie@example.com";
+        
+        const maskEmail = (email) => {
+            let firstWord = email.slice(0,1);
+            let lastWord = email.slice(email.indexOf("@")-1, email.length);
+            let replaceWord = email.slice(1,email.indexOf("@")-1);
+            let replaceWordStar = "*".repeat(replaceWord.length);
+            return firstWord + replaceWordStar + lastWord;
+        }
+      
+        console.log(maskEmail(email));
+
+        //優化版
+        const maskEmail2 = (email) => {
+            let atIndex = email.indexOf('@');
+
+            let firstChar = email.slice(0, 1);
+            let lastCharAndDomain = email.slice(atIndex - 1);
+            
+            let hiddenLength = atIndex - 2; //@的位置減掉第一個和前一個字母
+            let stars = "*".repeat(hiddenLength);
+
+            return firstChar + stars + lastCharAndDomain;
+
+        }
+
+        console.log(maskEmail2(email));
+
+        //加強優化版
+        const maskEmail3 = (email) => {
+            let atIndex2 = email.indexOf('@');
+
+            return (
+                email[0] +
+                '*'.repeat(atIndex2 - 2) +
+                email.slice(atIndex2 - 1)
+            );
+        }
+
+        console.log(maskEmail3(email));
+    </script>
+</body>
+</html>
