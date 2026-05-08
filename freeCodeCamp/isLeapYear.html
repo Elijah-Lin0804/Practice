@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //我最初寫的版本
+        const year = 2024;
+
+        const isLeapYear = (year) => {
+            const leapYearOrNot = (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? `${year} is a leap year.` : `${year} is not a leap year.`;
+            return leapYearOrNot;
+        }
+        const result = isLeapYear(year);
+        console.log(result);
+
+        //AI建議的寫法
+       
+        // 1. 定義要檢查的年份
+            const year2 = 2024;
+
+            /**
+             * 專業寫法通常會包含 JSDoc 註釋，說明函數用途
+             * 判斷是否為閏年
+             * @param {number} y - 年份
+             * @returns {boolean}
+             */
+            const checkLeapStatus = (y) => {
+            // 使用括號明確群組邏輯，讓其他開發者一眼看出：
+            // (能被4整除 且 不能被100整除) 或者 (能被400整除)
+                return (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+            };
+
+            // 2. 依照題目要求封裝輸出的格式
+            const isLeapYear2 = (year2) => {
+                const isLeap = checkLeapStatus(year2);
+                return isLeap ? `${year2} is a leap year.` : `${year2} is not a leap year.`;
+            };
+
+            // 3. 執行與輸出
+            const result2 = isLeapYear2(year2);
+            console.log(result2);
+
+
+    </script>
+</body>
+</html>
