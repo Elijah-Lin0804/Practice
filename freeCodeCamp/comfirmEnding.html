@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //我寫的代碼
+        const confirmEnding = (str, strCheck) => {
+            const result = str.lastIndexOf(strCheck);
+            if (result === -1) {
+                return false;
+            } else if (result !== str.length - strCheck.length) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        console.log(confirmEnding("Congratulation", "on"));
+
+        //AI優化
+        const confirmEnding2 = (str, strCheck) => {
+            const result = str.lastIndexOf(strCheck);
+            return result !== -1 && result === str.length - strCheck.length;
+        }
+        console.log(confirmEnding2("Congratulation", "on"));
+
+
+        //專業寫法
+        const confirmEnding3 = (str, target) => str.slice(-target.length) === target;
+
+        console.log(confirmEnding3("Congratulation", "on"));
+
+    </script>
+</body>
+</html>

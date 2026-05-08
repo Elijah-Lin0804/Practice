@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //以下是我寫的代碼
+        const truncateString = (string, num) => {
+            const cutChar = string.slice(num);
+            if (cutChar.length < num) {
+            return string;
+        } else {
+            const result = string.replace(cutChar, "...");   return result;
+         }
+        }
+
+        console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2));
+
+        //以下是AI建議解答
+        const truncateString2 = (string, num) => {
+            if (string.length > num) {
+                return string.slice(0, num) + "...";
+            } else {
+                return string;
+            }
+        }
+         console.log(truncateString2("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2));
+
+         //更專業的寫法
+         const truncateString3 = (str, num) =>
+            str.length > num ? str.slice(0, num) + "..." : str;
+        
+        console.log(truncateString3("apple", 3));
+
+
+
+    </script>
+</body>
+</html>
