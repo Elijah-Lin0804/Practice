@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//最初版本
+/*
+let lunches = [];
+
+const addLunchToEnd = (arr, item) => {
+    arr.push(item);
+    console.log(`${item} added to the end of the lunch menu.`);
+    return arr;
+}
+
+
+const addLunchToStart = (arr, item) => {
+    arr.unshift(item);
+    console.log(`${item} added to the start of the lunch menu.`);
+    return arr;
+}
+
+//addLunchToStart(lunches, 'Pork');
+//console.log(lunches);
+
+const removeLastLunch = (arr) => {
+    if (arr.length > 0) {
+      const removeItem = arr.pop();
+      console.log(`${removeItem} removed from the end of the lunch menu.`);
+      return arr;
+    } else {
+      console.log("No lunches to remove.")
+    }
+}
+//removeLastLunch(lunches);
+//console.log(lunches);
+
+const removeFirstLunch = (arr) => {
+    if (arr.length > 0) {
+      const removeItem = arr.shift();
+      console.log(`${removeItem} removed from the start of the lunch menu.`);
+      return arr;
+    } else {
+      console.log("No lunches to remove.")
+    }
+}
+//removeLastLunch(lunches);
+//console.log(lunches);
+
+const getRandomLunch = (arr) => {
+  if (arr.length === 0) {
+    console.log("No lunches available.");
+  } else {
+    const randomNum = Math.floor(Math.random() * arr.length);
+    const result = arr[randomNum];
+    console.log(`Randomly selected lunch: ${result}`);  return result;
+  }
+}
+//getRandomLunch(['pizza', 'berger', 'rice']);
+
+//console.log(lunches);
+//getRandomLunch(lunches);
+
+const showLunchMenu = (arr) => {
+  if (arr.length > 0) {
+    console.log(`Menu items: ${arr.join(", ")}`);
+  } else {
+    console.log("The menu is empty.");
+  }
+}
+showLunchMenu(["Greens", "Corns", "Beans"])
+//showLunchMenu(lunches);
+//addLunchToEnd(lunches, "Tacos")
+*/
+//AI建議優化版本
+let lunches = [];
+
+const logAction = (msg) => console.log(msg);
+
+const addLunchToEnd = (arr, item) => {
+  arr.push(item);
+  logAction(`${item} added to the end of the lunch menu.`);
+  return arr;
+}
+
+const addLunchToStart = (arr, item) => {
+  arr.unshift(item);
+  logAction(`${item} added to the start of the lunch menu.`);
+  return arr;
+}
+
+const removeLastLunch = (arr) => {
+  if (!arr.length) {
+    logAction(`No Lunches to remove.`);
+    return arr;
+  }
+  const removeItem = arr.pop();
+  logAction(`${removeItem} removed from the end of the lunch menu.`);
+  return arr;
+}
+
+const removeFirstLunch = (arr) => {
+  if(!arr.length) {
+    logAction(`No lunches to remove.`);
+    return arr;
+  }
+  const removeItem = arr.shift();
+  logAction(`${removeItem} removed from the start of the lunch menu.`);
+  return arr;
+}
+
+const getRandomLunch = (arr) => {
+  if (!arr.length) {
+    logAction(`No lunches available.`);
+    return null;//明確回傳空白值
+  }
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  const result = arr[randomIndex];
+  logAction(`Randomly selected lunch: ${result}`);
+  return arr;//AI建議為return result 不知道有沒有差別
+}
+
+const showLunchMenu = (arr) => {
+  if (!arr.length) {
+    logAction(`The menu is empty.`);
+    return;
+  }
+  logAction(`Menu items: ${arr.join(", ")}`);
+  return arr;
+}
+/*
+showLunchMenu(['pizza', 'berger', 'rice']);
+getRandomLunch(['pizza', 'berger', 'rice']);
+addLunchToStart(lunches, "Beef");
+console.log(lunches);
+removeLastLunch(lunches);
+console.log(lunches);
+*/
+
+    </script>
+</body>
+</html>
