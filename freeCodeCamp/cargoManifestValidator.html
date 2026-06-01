@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const normalizeUnits = (manifest) => {
+        const normalizedManifest = { ...manifest };
+
+        if(normalizedManifest.unit === "lb"){
+            normalizedManifest.weight = normalizedManifest.weight * 0.45;
+        }
+
+        normalizedManifest.unit = "kg";
+
+        return normalizedManifest;
+        }
+
+        const validateManifest = (manifest) => {
+        const errors = {};
+
+        if (!manifest.hasOwnProperty("containerId")) {
+            errors.containerId = "Missing";
+        } else if (!Number.isInteger(manifest.containerId) || manifest.containerId <= 0) {
+            errors.containerId = "Invalid";
+        }
+
+        if(!manifest.hasOwnProperty("destination")) {
+            errors.destination = "Missing";
+        } else if (typeof manifest.destination !== "string" || manifest.destination.trim() === "") {
+            errors.destination = "Invalid";
+        }
+
+        // 3. 驗證 weight：必須存在、是正數 (大於 0)、且不能是 NaN
+        if (!manifest.hasOwnProperty("weight")) {
+            errors.weight = "Missing";
+        } else if (typeof manifest.weight !== "number" || Number.isNaN(manifest.weight) || manifest.weight <= 0) {
+            errors.weight = "Invalid";
+        }
+
+        // 4. 驗證 unit：必須存在、且只能是 "kg" 或 "lb"
+        if (!manifest.hasOwnProperty("unit")) {
+            errors.unit = "Missing";
+        } else if (manifest.unit !== "kg" && manifest.unit !== "lb") {
+            errors.unit = "Invalid";
+        }
+
+        // 5. 驗證 hazmat：必須存在、且必須是布林值 (true 或 false)
+        if (!manifest.hasOwnProperty("hazmat")) {
+            errors.hazmat = "Missing";
+        } else if (typeof manifest.hazmat !== "boolean") {
+            errors.hazmat = "Invalid";
+        }
+
+        // 回傳錯誤物件（若完全沒錯誤，errors 就會是空物件 {}）
+        return errors;
+
+        }
+
+        const processManifest = (manifest) => {
+        const errors = validateManifest(manifest);
+        const isValid = Object.keys(errors).length === 0;
+
+        if (isValid) {
+            // 情況 A：驗證成功
+            // 1) 輸出成功訊息與 containerId
+            console.log(`Validation success: ${manifest.containerId}`);
+            
+            // 2) 使用 normalizeUnits() 轉換單位，並輸出總重量
+            const normalized = normalizeUnits(manifest);
+            console.log(`Total weight: ${normalized.weight} kg`);
+        } else {
+            // 情況 B：驗證失敗
+            // 1) 輸出錯誤訊息與 containerId
+            console.log(`Validation error: ${manifest.containerId}`);
+            
+            // 2) 直接輸出錯誤物件
+            console.log(errors);
+        }
+        }
+
+//------------------------------------------------------------------------------------------------
+
+        // ================
+        // 測試驅動驗證模組
+        // ================
+
+        const runTests = () => {
+        console.log("--- 開始執行自動化測試 ---");
+        let passedCount = 0;
+        let totalCount = 26;
+
+        // 輔助函式：比對物件是否相等
+        const isObjectEqual = (obj1, obj2) => {
+            return JSON.stringify(obj1) === JSON.stringify(obj2);
+        };
+
+        // 輔助函式：安全測試
+        const test = (num, description, assertionFn) => {
+            try {
+            if (assertionFn()) {
+                console.log(`✅ Passed [${num}]: ${description}`);
+                passedCount++;
+            } else {
+                console.error(`❌ Failed [${num}]: ${description}`);
+            }
+            } catch (err) {
+            console.error(`❌ Failed [${num}] 因程式出錯: ${description}\n   錯誤訊息: ${err.message}`);
+            }
+        };
+
+        // --- Part 1: normalizeUnits 測試 ---
+        test(1, "應包含 normalizeUnits 函數並帶有 manifest 參數", () => typeof normalizeUnits === "function" && normalizeUnits.length === 1);
+        
+        test(2, "呼叫 normalizeUnits 轉換 lb 應回傳正確的新物件且不污染原資料", () => {
+            const src = { containerId: 68, destination: "Salinas", weight: 101, unit: "lb", hazmat: true };
+            const res = normalizeUnits(src);
+            return isObjectEqual(res, { containerId: 68, destination: "Salinas", weight: 45.45, unit: "kg", hazmat: true }) && src.weight === 101 && src.unit === "lb";
+        });
+
+        test(3, "normalizeUnits 應正確將 lb 依 0.45 比例轉為 kg", () => {
+            const res = normalizeUnits({ weight: 10, unit: "lb" });
+            return res.weight === 4.5 && res.unit === "kg";
+        });
+
+        test(4, "normalizeUnits 應始終回傳新複製的物件而非原物件", () => {
+            const src = { weight: 10, unit: "kg" };
+            return normalizeUnits(src) !== src;
+        });
+
+        // --- Part 2: validateManifest 測試 ---
+        test(5, "應包含 validateManifest 函數並帶有 manifest 參數", () => typeof validateManifest === "function" && validateManifest.length === 1);
+        
+        test(6, "有效物件應回傳空物件 {}", () => {
+            return isObjectEqual(validateManifest({ containerId: 1, destination: "Santa Cruz", weight: 304, unit: "kg", hazmat: false }), {});
+        });
+
+        test(7, "若輸入完全合法，驗證應回傳 {}", () => isObjectEqual(validateManifest({ containerId: 10, destination: "A", weight: 5, unit: "kg", hazmat: true }), {}));
+
+        test(8, "完全空物件應回傳全屬性 Missing 且不污染原資料", () => {
+            const src = {};
+            const res = validateManifest(src);
+            return isObjectEqual(res, { containerId: "Missing", destination: "Missing", weight: "Missing", unit: "Missing", hazmat: "Missing" });
+        });
+
+        test(9, "containerId 為 null 應回傳 { containerId: 'Invalid' }", () => {
+            return isObjectEqual(validateManifest({ containerId: null, destination: "Santa Cruz", weight: 304, unit: "kg", hazmat: false }), { containerId: "Invalid" });
+        });
+
+        test(10, "各屬性皆不合法時，應全部回傳 'Invalid'", () => {
+            return isObjectEqual(validateManifest({ containerId: 0, destination: 405, weight: -84, unit: "pounds", hazmat: "no" }), { containerId: "Invalid", destination: "Invalid", weight: "Invalid", unit: "Invalid", hazmat: "Invalid" });
+        });
+
+        test(11, "containerId 為負數應視為 Invalid，其餘缺失為 Missing", () => {
+            return isObjectEqual(validateManifest({ containerId: -2 }), { containerId: "Invalid", destination: "Missing", weight: "Missing", unit: "Missing", hazmat: "Missing" });
+        });
+
+        test(12, "containerId 為浮點數應視為 Invalid", () => {
+            return isObjectEqual(validateManifest({ containerId: 3.50 }), { containerId: "Invalid", destination: "Missing", weight: "Missing", unit: "Missing", hazmat: "Missing" });
+        });
+
+        test(13, "destination 為純空白字串應視為 Invalid", () => {
+            return isObjectEqual(validateManifest({ destination: "  " }), { containerId: "Missing", destination: "Invalid", weight: "Missing", unit: "Missing", hazmat: "Missing" });
+        });
+
+        test(14, "weight 為 NaN 應視為 Invalid", () => {
+            return isObjectEqual(validateManifest({ weight: NaN }), { containerId: "Missing", destination: "Missing", weight: "Invalid", unit: "Missing", hazmat: "Missing" });
+        });
+
+        test(15, "驗證失敗時，回傳物件必須精確描述缺失/錯誤屬性", () => {
+            const res = validateManifest({ containerId: 5, destination: "" });
+            return res.destination === "Invalid" && res.weight === "Missing";
+        });
+
+        test(16, "validateManifest 不應修改傳入的原始物件", () => {
+            const src = { containerId: -5 };
+            validateManifest(src);
+            return src.containerId === -5;
+        });
+
+        // --- Part 3: processManifest 測試 (優化攔截器，完整保留原始物件型態) ---
+        test(17, "應包含 processManifest 函數並帶有 manifest 參數", () => typeof processManifest === "function" && processManifest.length === 1);
+
+        const interceptLogs = (fn, arg) => {
+            const logs = [];
+            const originalLog = console.log;
+            console.log = (...args) => {
+            // 如果印出的是單一物件，就直接保留物件本身，否則轉成字串
+            logs.push(args.length === 1 && typeof args[0] === 'object' && args[0] !== null ? args[0] : args.join(" "));
+            };
+            try {
+            fn(arg);
+            } finally {
+            console.log = originalLog;
+            }
+            return logs;
+        };
+
+        test(18, "成功案例：應先印出成功訊息，再印出總重量", () => {
+            const logs = interceptLogs(processManifest, { containerId: 55, destination: "Carmel", weight: 400, unit: "lb", hazmat: false });
+            return logs[0] === "Validation success: 55" && logs[1] === "Total weight: 180 kg";
+        });
+
+        test(19, "成功案例：第一行 log 格式必須為 'Validation success: ${containerId}'", () => {
+            const logs = interceptLogs(processManifest, { containerId: 99, destination: "X", weight: 10, unit: "kg", hazmat: false });
+            return logs[0] === "Validation success: 99";
+        });
+
+        test(20, "成功案例：必須使用 normalizeUnits() 轉換重量並正確印出", () => {
+            const logs = interceptLogs(processManifest, { containerId: 1, destination: "X", weight: 10, unit: "lb", hazmat: false });
+            return logs[1] === "Total weight: 4.5 kg";
+        });
+
+        test(21, "成功案例：必須嚴格拆分為兩次 console.log() 呼叫", () => {
+            const logs = interceptLogs(processManifest, { containerId: 1, destination: "X", weight: 10, unit: "kg", hazmat: false });
+            return logs.length === 2;
+        });
+
+        test(22, "失敗案例1：應先印出錯誤訊息，再印出對應錯誤物件", () => {
+            const logs = interceptLogs(processManifest, { containerId: -88, destination: "Soledad", weight: NaN });
+            const expectedObj = { containerId: "Invalid", weight: "Invalid", unit: "Missing", hazmat: "Missing" };
+            return logs[0] === "Validation error: -88" && isObjectEqual(logs[1], expectedObj);
+        });
+
+        test(23, "失敗案例2：缺失 id 時應印出 Validation error: undefined 及其錯誤物件", () => {
+            const logs = interceptLogs(processManifest, { destination: "Watsonville", hazmat: true });
+            const expectedObj = { containerId: "Missing", weight: "Missing", unit: "Missing" };
+            return logs[0] === "Validation error: undefined" && isObjectEqual(logs[1], expectedObj);
+        });
+
+        test(24, "失敗案例：第一行 log 格式必須為 'Validation error: ${containerId}'", () => {
+            const logs = interceptLogs(processManifest, { containerId: 404 });
+            return logs[0] === "Validation error: 404";
+        });
+
+        test(25, "失敗案例：第二行必須直接印出 validateManifest() 的回傳結果", () => {
+            const src = { containerId: -1 };
+            const logs = interceptLogs(processManifest, src);
+            const expectedObj = validateManifest(src);
+            return isObjectEqual(logs[1], expectedObj);
+        });
+
+        test(26, "失敗案例：必須嚴格拆分為兩次 console.log() 呼叫", () => {
+            const logs = interceptLogs(processManifest, { containerId: -1 });
+            return logs.length === 2;
+        });
+
+        // --- 總結報告 ---
+        console.log("------------------------------------");
+        if (passedCount === totalCount) {
+            console.log(`🎉 恭喜！全數通過： ${passedCount} / ${totalCount} 項測試成功！`);
+        } else {
+            console.warn(`⚠️ 尚未完全通過： 成功 ${passedCount} 項，失敗 ${totalCount - passedCount} 項。請檢查上方紅字。`);
+        }
+        };
+
+        // 執行測試
+        runTests();
+
+
+
+    </script>
+</body>
+</html>
