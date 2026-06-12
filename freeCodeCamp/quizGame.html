@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const questions = [
+            {
+                category: "Science",
+                question: "水的化學式是什麼?",
+                choices: ["H2O", "CO2", "O2"],
+                answer: "H2O",
+            },
+            {
+                category: "History",
+                question: "第一次世界大戰在哪一年爆發?",
+                choices: ["1914", "1910", "1898"],
+                answer: "1914",
+            },
+            {
+                category: "Language",
+                question: "水的漢語拼音是哪一個?",
+                choices: ["Shui3", "Shi3", "Shuei3"],
+                answer: "Shui3",
+            },
+            {
+                category: "Language",
+                question: "水的英文是什麼?",
+                choices: ["Water", "Fire", "Air"],
+                answer: "Water",
+            },
+            {
+                category: "Math",
+                question: "100/9的餘數為多少?",
+                choices: ["3", "1", "0"],
+                answer: "1",
+            }
+        ];
+
+        // 7. 隨機選取題目
+        const getRandomQuestion = (questionsArray) => {
+            const randomIndex = Math.floor(Math.random() * questionsArray.length);
+            return questionsArray[randomIndex];
+        };
+
+        // 8. 隨機選取電腦答案
+        const getRandomComputerChoice = (choicesArray) => {
+            const randomIndex = Math.floor(Math.random() * choicesArray.length);
+            return choicesArray[randomIndex];
+        };
+
+        // 9. 比對結果並回傳訊息
+        const getResults = (questionObj, computerChoice) => {
+            if (computerChoice === questionObj.answer) {
+                return "The computer's choice is correct!";
+            } else {
+                return `The computer's choice is wrong. The correct answer is: ${questionObj.answer}`;
+            }
+        };
+
+        // ==========================================
+        // 模擬主程式：把三台機器串聯起來跑一次遊戲
+        // ==========================================
+
+        console.log("--- 🎲 遊戲開始 ---");
+
+        // 1. 呼叫第一台機器：從大題庫中隨機抽出一題
+        const currentQuestion = getRandomQuestion(questions);
+        console.log(`【系統抽到的題目分類】: ${currentQuestion.category}`);
+        console.log(`【題目內容】: ${currentQuestion.question}`);
+        console.log(`【選項有這些】: ${currentQuestion.choices}`);
+        console.log(`【後台悄悄紀錄的正確答案】: ${currentQuestion.answer}`);
+
+        console.log("----------------------------------");
+
+        // 2. 呼叫第二台機器：把這一題的「選項陣列」拿給電腦盲猜
+        const computerChoice = getRandomComputerChoice(currentQuestion.choices);
+        console.log(`🤖 電腦經過大腦思考後，隨機選了: "${computerChoice}"`);
+
+        console.log("----------------------------------");
+
+        // 3. 呼叫第三台機器：把「剛剛抽到的題目物件」和「電腦選的答案」丟進去比對
+        const gameResult = getResults(currentQuestion, computerChoice);
+
+        // 4. 印出最終判定結果
+        console.log(`📢 裁判判定結果: ${gameResult}`);
+        console.log("--- 🏁 遊戲結束 ---");
+
+
+
+    </script>
+</body>
+</html>
